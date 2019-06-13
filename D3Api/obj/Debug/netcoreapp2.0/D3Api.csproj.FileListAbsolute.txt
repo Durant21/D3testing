@@ -1,0 +1,10 @@
+/home/dantefernandez/Projects/VS/webApi_061319/D3Api/bin/Debug/netcoreapp2.0/D3Api.deps.json
+/home/dantefernandez/Projects/VS/webApi_061319/D3Api/bin/Debug/netcoreapp2.0/D3Api.runtimeconfig.json
+/home/dantefernandez/Projects/VS/webApi_061319/D3Api/bin/Debug/netcoreapp2.0/D3Api.runtimeconfig.dev.json
+/home/dantefernandez/Projects/VS/webApi_061319/D3Api/bin/Debug/netcoreapp2.0/D3Api.dll
+/home/dantefernandez/Projects/VS/webApi_061319/D3Api/bin/Debug/netcoreapp2.0/D3Api.pdb
+/home/dantefernandez/Projects/VS/webApi_061319/D3Api/obj/Debug/netcoreapp2.0/D3Api.csproj.CoreCompileInputs.cache
+/home/dantefernandez/Projects/VS/webApi_061319/D3Api/obj/Debug/netcoreapp2.0/D3Api.AssemblyInfoInputs.cache
+/home/dantefernandez/Projects/VS/webApi_061319/D3Api/obj/Debug/netcoreapp2.0/D3Api.AssemblyInfo.cs
+/home/dantefernandez/Projects/VS/webApi_061319/D3Api/obj/Debug/netcoreapp2.0/D3Api.dll
+/home/dantefernandez/Projects/VS/webApi_061319/D3Api/obj/Debug/netcoreapp2.0/D3Api.pdb
