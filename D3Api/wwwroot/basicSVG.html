@@ -1,0 +1,55 @@
+<html>
+
+<body>
+<svg width="500" height="100" style="background-color: lightgrey">
+    <rect id="rect1" x="10" y="10" width="50" height="80"
+          style="stroke:#000000; fill:none;"/>
+</svg>
+<br>
+<br>
+<br>
+<br>
+<input id="button1" type="button" value="Change Dimensions"
+            onclick="changeDimensions()"/>
+
+<script>
+    myList = 
+    function changeDimensions() {
+        document.getElementById("rect1").setAttribute("width", "100");
+    }
+</script>
+
+
+
+<p id="demo"></p>
+
+<script>
+var cars = ["Saab", "Volvo", "BMW"];
+var traces = [
+[1,7],
+[2,11],
+[3,11],
+[4,11],
+[5,11],
+[6,7],
+[11,7],
+[7,8],
+[7,9],
+[7,10]
+];
+
+for(var i = 0 ; i < 10; i ++)
+{
+  //alert("P: " + traces[i][0]);
+}
+
+
+for(var i = 0 ; i < 10; i ++)
+{
+  //alert("C: " + traces[i][1]);
+}
+
+document.getElementById("demo").innerHTML = cars;
+</script>
+</body>
+</html>        
