@@ -1,10 +1,14 @@
 {
   "children": [
     {
-      "children": [
+     "children": [
+        {
+          "children": [
+            {}
+          ]
+        },
         {},
         {}
       ]
-    }
-  ]
+    }]
 }
