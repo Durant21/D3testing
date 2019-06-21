@@ -23,43 +23,89 @@
 
 <p id="demo"></p>
 
-<svg id="cont" height="1000" width="1000" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg id="cont" height="200" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <circle id="cir1" cx="300" cy="300" r="40" stroke="yellow" stroke-width="" fill="none" />
 </svg>
 
 <script>
+//document.getElementById('cont').setAttribute("height", "1000px");
+svgHeight = document.getElementById('cont').getAttribute("height");
+svgWidth = document.getElementById('cont').getAttribute("width");
+
+//alert( svgWidth);
+      var pCenterX = svgWidth/2;
+      var pCenterY = svgHeight/2;
+      //var w = 300;
       var cars = ["Saab", "Volvo", "BMW"];
       var traces = [
-      [1,7],
-      [2,11],
-      [3,11],
-      [4,11],
-      [5,11],
-      [6,7],
-      [11,7],
-      [7,8],
-      [7,9],
-      [7,10]
+        [1,7],
+        [2,11],
+        [3,11],
+        [4,11],
+        [5,11],
+        [6,7],
+        [11,7],
+        [7,8],
+        [7,9],
+        [7,10]
       ];
 
-      var aOuter = new Array ();
-      var x = 100;
+      // "pa" is panel array
+      var paL1 = new Array ();
+      var x = svgWidth * .25;
       var y = 0;
       for(var i = 0 ; i < 10; i ++)
       {
-        //alert("P: " + traces[i][0]);
-        if (traces[i][0] == 7) {
+        
+        if (traces[i][1] == 7) {
+          //alert("P: " + traces[i][0] + "," + traces[i][1]);
           var nArray = new Array ();
           y = y + 50;
-          nArray[0] = [x,y];
-          aOuter[i] = nArray;
+          nArray[0] = [x,y,traces[i][0],traces[i][1]];
+          paL1[i] = nArray;
         }
       }
 
 
       for(var i = 0 ; i < 10; i ++)
       {
-        //alert("C: " + traces[i][1]);
+        if (paL1[i]) {
+          t =  paL1[i][0]; 
+          r = t[2];
+          alert(r);
+          for(var i = 0 ; i < 10; i ++)
+          {
+            
+            if (traces[i][1] == r) {
+              //alert()
+              a = 0;
+            }
+          }
+          
+        }
+        
+        //if (paL1[i][1] == 7) {
+          //alert("P: " + traces[i][0] + "," + traces[i][1]);
+          // var nArray = new Array ();
+          // y = y + 50;
+          // nArray[0] = [x,y];
+          // paL1[i] = nArray;
+        //}
+      }
+
+
+      y = 0;
+      x = svgWidth * .75;
+      for(var i = 0 ; i < 10; i ++)
+      {
+       // alert("C: " + traces[i][1]);
+        if (traces[i][0] == 7) {
+          var nArray = new Array ();
+          y = y + 50;
+          nArray[0] = [x,y];
+          paL1[i] = nArray;
+        }
+ 
       }
 
       document.getElementById("demo").innerHTML = cars;
@@ -69,7 +115,7 @@
       for(var i = 0 ; i < 10; i ++)
       {
         var circle = document.createElementNS(svgns, 'circle');
-        x1 = aOuter[i];
+        x1 = paL1[i];
         if (x1) {
           x = x1[0][0];
           y = x1[0][1];
@@ -81,6 +127,15 @@
           container.appendChild(circle);
         }
       }
+
+      var circleC = document.createElementNS(svgns,'circle');
+      
+          circleC.setAttributeNS(null, 'cx', pCenterX);
+          circleC.setAttributeNS(null, 'cy', pCenterY);
+          circleC.setAttributeNS(null, 'r', 2);
+          circleC.setAttributeNS(null, 'style', 'fill: none; stroke: red; stroke-width: 1px;' );
+          container.appendChild(circleC);
+ 
 //}
 </script>
 </body>
