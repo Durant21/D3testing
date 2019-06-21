@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/dante/Projects/VSCode/test2/D3testing/D3Api/D3Api.csproj": {}
+  },
+  "projects": {
+    "/home/dante/Projects/VSCode/test2/D3testing/D3Api/D3Api.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/dante/Projects/VSCode/test2/D3testing/D3Api/D3Api.csproj",
+        "projectName": "D3Api",
+        "projectPath": "/home/dante/Projects/VSCode/test2/D3testing/D3Api/D3Api.csproj",
+        "packagesPath": "/home/dante/.nuget/packages/",
+        "outputPath": "/home/dante/Projects/VSCode/test2/D3testing/D3Api/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/home/dante/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.0": {
+          "dependencies": {
+            "Microsoft.AspNetCore.All": {
+              "target": "Package",
+              "version": "[2.0.7, )"
+            },
+            "Microsoft.AspNetCore.HttpsPolicy": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}

@@ -8,3 +8,14 @@
 /home/dantefernandez/Projects/VS/webApi_061319/D3Api/obj/Debug/netcoreapp2.0/D3Api.AssemblyInfo.cs
 /home/dantefernandez/Projects/VS/webApi_061319/D3Api/obj/Debug/netcoreapp2.0/D3Api.dll
 /home/dantefernandez/Projects/VS/webApi_061319/D3Api/obj/Debug/netcoreapp2.0/D3Api.pdb
+/home/dante/Projects/VSCode/test2/D3testing/D3Api/bin/Debug/netcoreapp2.0/D3Api.deps.json
+/home/dante/Projects/VSCode/test2/D3testing/D3Api/bin/Debug/netcoreapp2.0/D3Api.runtimeconfig.json
+/home/dante/Projects/VSCode/test2/D3testing/D3Api/bin/Debug/netcoreapp2.0/D3Api.runtimeconfig.dev.json
+/home/dante/Projects/VSCode/test2/D3testing/D3Api/bin/Debug/netcoreapp2.0/D3Api.dll
+/home/dante/Projects/VSCode/test2/D3testing/D3Api/bin/Debug/netcoreapp2.0/D3Api.pdb
+/home/dante/Projects/VSCode/test2/D3testing/D3Api/obj/Debug/netcoreapp2.0/D3Api.csprojAssemblyReference.cache
+/home/dante/Projects/VSCode/test2/D3testing/D3Api/obj/Debug/netcoreapp2.0/D3Api.csproj.CoreCompileInputs.cache
+/home/dante/Projects/VSCode/test2/D3testing/D3Api/obj/Debug/netcoreapp2.0/D3Api.AssemblyInfoInputs.cache
+/home/dante/Projects/VSCode/test2/D3testing/D3Api/obj/Debug/netcoreapp2.0/D3Api.AssemblyInfo.cs
+/home/dante/Projects/VSCode/test2/D3testing/D3Api/obj/Debug/netcoreapp2.0/D3Api.dll
+/home/dante/Projects/VSCode/test2/D3testing/D3Api/obj/Debug/netcoreapp2.0/D3Api.pdb
