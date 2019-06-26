@@ -77,7 +77,8 @@ svgWidth = document.getElementById('cont').getAttribute("width");
           //alert("P: " + traces[i][0] + "," + traces[i][1]);
           var nArray = new Array ();
           y = y + 50;
-          nArray[0] = [x,y,traces[i][0],traces[i][1]];
+          // nArray[0] = [x,y,traces[i][0],traces[i][1]];
+          nArray[0] = [x,y,traces[i][0],traces[i][1],pCenterX,pCenterY];
           paL1[i] = nArray;
         }
       }
@@ -96,7 +97,8 @@ svgWidth = document.getElementById('cont').getAttribute("width");
               // alert(traces[n][0]);
               var nArray = new Array ();
               y = y + 50;
-              nArray[0] = [x,y,traces[n][0],traces[n][1]];
+              // nArray[0] = [x,y,traces[n][0],traces[n][1]];
+              nArray[0] = [x,y,traces[n][0],traces[n][1],t[0],t[1]];
               paL2[n] = nArray;
     
               a = 0;
@@ -232,28 +234,64 @@ svgWidth = document.getElementById('cont').getAttribute("width");
           container.appendChild(circleCenter);
  
 
-          var newLine = document.createElementNS(svgns,'line');
-          newLine.setAttribute('id','line2');
-          newLine.setAttribute('x1','0');
-          newLine.setAttribute('y1','0');
-          newLine.setAttribute('x2','300');
-          newLine.setAttribute('y2','200');
-          newLine.setAttribute("stroke", "black")
-          container.appendChild(newLine);
+          // var newLine = document.createElementNS(svgns,'line');
+          // newLine.setAttribute('id','line2');
+          // newLine.setAttribute('x1','0');
+          // newLine.setAttribute('y1','0');
+          // newLine.setAttribute('x2','300');
+          // newLine.setAttribute('y2','200');
+          // newLine.setAttribute("stroke", "black")
+          // container.appendChild(newLine);
 
-       var line = document.createElementNS(svgns, 'line');
-       line.setAttribute( 'x1',  '10');
-       line.setAttribute( 'y1',  '10');
-       line.setAttribute( 'x2', '290');
-       line.setAttribute( 'y2', '490');
-       line.setAttribute("stroke", "red")
-      //  line.style.stroke='rgb(255,90,50)';
-      //  line.style.strokeWidth=5;
-
-        container.appendChild(line);
+          // var line = document.createElementNS(svgns, 'line');
+          // line.setAttribute( 'x1',  '10');
+          // line.setAttribute( 'y1',  '10');
+          // line.setAttribute( 'x2', '290');
+          // line.setAttribute( 'y2', '490');
+          // line.setAttribute("stroke", "red")
+          //   container.appendChild(line);
 
 
         // document.getElementById("cont").appendChild(line);
+
+for(var n = 0 ; n < 10; n ++)
+  {
+      if (paL1[n])
+      {
+      tempPt = paL1[n];
+      k = tempPt[0][0];
+       var line = document.createElementNS(svgns, 'line');
+       line.setAttribute( 'x1',  k.toString());
+       line.setAttribute( 'y1',   tempPt[0][1]);
+       line.setAttribute( 'x2',  tempPt[0][4]);
+       line.setAttribute( 'y2',  tempPt[0][5]);
+       line.setAttribute("stroke", "red")
+ 
+       container.appendChild(line);
+
+
+      }
+ }
+
+
+for(var n = 0 ; n < 10; n ++)
+  {
+      if (paL2[n])
+      {
+      tempPt = paL2[n];
+      k = tempPt[0][0];
+       var line = document.createElementNS(svgns, 'line');
+       line.setAttribute( 'x1',  k.toString());
+       line.setAttribute( 'y1',   tempPt[0][1]);
+       line.setAttribute( 'x2',  tempPt[0][4]);
+       line.setAttribute( 'y2',  tempPt[0][5]);
+       line.setAttribute("stroke", "red")
+ 
+       container.appendChild(line);
+
+
+      }
+ }
 
 
 // var draw = SVG('mysvg').size(300, 130)
@@ -262,10 +300,10 @@ svgWidth = document.getElementById('cont').getAttribute("width");
 // line.stroke({ color: '#f06', width: 10, linecap: 'round' })
 
 //}
-for(var i = 0 ; i < 1000; i ++) {
- var r = getNode('rect', { x: i, y: 40, width: 100, height: 40, rx: 8, ry: 8, fill: 'pink', stroke:'purple', strokeWidth:7 });
-svg.appendChild(r);
-}
+// for(var i = 0 ; i < 1000; i ++) {
+//  var r = getNode('rect', { x: i, y: 40, width: 100, height: 40, rx: 8, ry: 8, fill: 'pink', stroke:'purple', strokeWidth:7 });
+// svg.appendChild(r);
+// }
 
 function getNode(n, v) {
   n = document.createElementNS("http://www.w3.org/2000/svg", n);
