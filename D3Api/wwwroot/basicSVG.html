@@ -1,10 +1,14 @@
 <html>
 
 <body>
-<svg width="500" height="100" style="background-color: lightgrey">
+<svg id="mysvg" width="500" height="100" style="background-color: lightgrey">
     <rect id="rect1" x="10" y="10" width="50" height="80"
           style="stroke:#000000; fill:none;"/>
           <g id="myg" class="links"></g>
+          <!-- <line x1= "10" y1= "10"
+          x2="490" y2="490"
+          style="stroke:rgb(255,90,50); stroke-width:5" -->
+    />
 </svg>
 <br>
 <br>
@@ -24,8 +28,12 @@
 
 <p id="demo"></p>
 
-<svg id="cont" height="300" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg id="cont" height="400" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <circle id="cir1" cx="300" cy="300" r="40" stroke="yellow" stroke-width="" fill="none" />
+        <!-- <line x1= "10" y1= "10"
+          x2="490" y2="490"
+          style="stroke:rgb(255,90,50); stroke-width:5" -->
+    />
 </svg>
 
 <script>
@@ -46,7 +54,7 @@ svgWidth = document.getElementById('cont').getAttribute("width");
         ['aaa',11],
         [3,11],
         [4,11],
-        [5,11],
+        ['cc',11],
         [6,7],
         [11,7],
         [7,8],
@@ -57,6 +65,9 @@ svgWidth = document.getElementById('cont').getAttribute("width");
       // "pa" is panel array
       var paL1 = new Array ();
       var paL2 = new Array ();
+      var paR1 = new Array ();
+      var myPts = new Array ();
+
       var x = svgWidth * .25;
       var y = 0;
       for(var i = 0 ; i < 10; i ++)
@@ -66,7 +77,8 @@ svgWidth = document.getElementById('cont').getAttribute("width");
           alert("P: " + traces[i][0] + "," + traces[i][1]);
           var nArray = new Array ();
           y = y + 50;
-          nArray[0] = [x,y,traces[i][0],traces[i][1]];
+          // nArray[0] = [x,y,traces[i][0],traces[i][1]];
+          nArray[0] = [x,y,traces[i][0],traces[i][1],pCenterX,pCenterY];
           paL1[i] = nArray;
         }
       }
@@ -81,12 +93,12 @@ svgWidth = document.getElementById('cont').getAttribute("width");
           // alert(r);
           for(var n = 0 ; n < 10; n ++)
           {
-            
             if (traces[n][1] == r) {
               // alert(traces[n][0]);
               var nArray = new Array ();
               y = y + 50;
-              nArray[0] = [x,y,traces[n][0],traces[n][1]];
+              // nArray[0] = [x,y,traces[n][0],traces[n][1]];
+              nArray[0] = [x,y,traces[n][0],traces[n][1],t[0],t[1]];
               paL2[n] = nArray;
     
               a = 0;
@@ -104,7 +116,7 @@ svgWidth = document.getElementById('cont').getAttribute("width");
         //}
       }
 
-
+      // populate panel R 1  (paR1)
       y = 0;
       x = svgWidth * .75;
       for(var i = 0 ; i < 10; i ++)
@@ -113,8 +125,9 @@ svgWidth = document.getElementById('cont').getAttribute("width");
         if (traces[i][0] == 7) {
           var nArray = new Array ();
           y = y + 50;
-          nArray[0] = [x,y];
-          paL1[i] = nArray;
+          // nArray[0] = [x,y];
+          nArray[0] = [x,y,traces[i][0],traces[i][1]];
+          paR1[i] = nArray;
         }
  
       }
@@ -130,12 +143,27 @@ svgWidth = document.getElementById('cont').getAttribute("width");
         if (x1) {
           x = x1[0][0];
           y = x1[0][1];
-
+          valP = x1[0][2];
+          var tmpPt = new Array ();
+          tmpPt[0] = x;
+          tmpPt[1] = y;
           circle.setAttributeNS(null, 'cx', x);
           circle.setAttributeNS(null, 'cy', y);
           circle.setAttributeNS(null, 'r', 2);
           circle.setAttributeNS(null, 'style', 'fill: none; stroke: blue; stroke-width: 1px;' );
           container.appendChild(circle);
+
+          
+          var text1 = document.createElementNS(svgns, 'text');
+          text1.setAttributeNS(null,'x',x);
+          text1.setAttributeNS(null,'y',y);
+          text1.setAttributeNS(null,'font-size','20px');
+          text1.setAttributeNS(null,'fill','blue');
+          var textNode = document.createTextNode(valP);
+          text1.appendChild(textNode);
+          document.getElementById("myg").appendChild(text1);
+          container.appendChild(text1);
+ 
         }
       }
 
@@ -169,16 +197,121 @@ svgWidth = document.getElementById('cont').getAttribute("width");
         }
       }
 
+      for(var i = 0 ; i < 10; i ++)
+      {
+        var circle3 = document.createElementNS(svgns, 'circle');
+        x1 = paR1[i];
+        if (x1) {
+          x = x1[0][0];
+          y = x1[0][1];
+          valP = x1[0][3];
 
-      var circleC = document.createElementNS(svgns,'circle');
+          circle3.setAttributeNS(null, 'cx', x);
+          circle3.setAttributeNS(null, 'cy', y);
+          circle3.setAttributeNS(null, 'r', 2);
+          circle3.setAttributeNS(null, 'style', 'fill: none; stroke: blue; stroke-width: 1px;' );
+          container.appendChild(circle3);
+
+          var text1 = document.createElementNS(svgns, 'text');
+          text1.setAttributeNS(null,'x',x);
+          text1.setAttributeNS(null,'y',y);
+          text1.setAttributeNS(null,'font-size','20px');
+          text1.setAttributeNS(null,'fill','green');
+          var textNode = document.createTextNode(valP);
+          text1.appendChild(textNode);
+          document.getElementById("myg").appendChild(text1);
+          container.appendChild(text1);
+        }
+      }
+
+
+      var circleCenter = document.createElementNS(svgns,'circle');
       
-          circleC.setAttributeNS(null, 'cx', pCenterX);
-          circleC.setAttributeNS(null, 'cy', pCenterY);
-          circleC.setAttributeNS(null, 'r', 2);
-          circleC.setAttributeNS(null, 'style', 'fill: none; stroke: red; stroke-width: 1px;' );
-          container.appendChild(circleC);
+          circleCenter.setAttributeNS(null, 'cx', pCenterX);
+          circleCenter.setAttributeNS(null, 'cy', pCenterY);
+          circleCenter.setAttributeNS(null, 'r', 2);
+          circleCenter.setAttributeNS(null, 'style', 'fill: none; stroke: red; stroke-width: 1px;' );
+          container.appendChild(circleCenter);
  
+
+          // var newLine = document.createElementNS(svgns,'line');
+          // newLine.setAttribute('id','line2');
+          // newLine.setAttribute('x1','0');
+          // newLine.setAttribute('y1','0');
+          // newLine.setAttribute('x2','300');
+          // newLine.setAttribute('y2','200');
+          // newLine.setAttribute("stroke", "black")
+          // container.appendChild(newLine);
+
+          // var line = document.createElementNS(svgns, 'line');
+          // line.setAttribute( 'x1',  '10');
+          // line.setAttribute( 'y1',  '10');
+          // line.setAttribute( 'x2', '290');
+          // line.setAttribute( 'y2', '490');
+          // line.setAttribute("stroke", "red")
+          //   container.appendChild(line);
+
+
+        // document.getElementById("cont").appendChild(line);
+
+for(var n = 0 ; n < 10; n ++)
+  {
+      if (paL1[n])
+      {
+      tempPt = paL1[n];
+      k = tempPt[0][0];
+       var line = document.createElementNS(svgns, 'line');
+       line.setAttribute( 'x1',  k.toString());
+       line.setAttribute( 'y1',   tempPt[0][1]);
+       line.setAttribute( 'x2',  tempPt[0][4]);
+       line.setAttribute( 'y2',  tempPt[0][5]);
+       line.setAttribute("stroke", "red")
+ 
+       container.appendChild(line);
+
+
+      }
+ }
+
+
+for(var n = 0 ; n < 10; n ++)
+  {
+      if (paL2[n])
+      {
+      tempPt = paL2[n];
+      k = tempPt[0][0];
+       var line = document.createElementNS(svgns, 'line');
+       line.setAttribute( 'x1',  k.toString());
+       line.setAttribute( 'y1',   tempPt[0][1]);
+       line.setAttribute( 'x2',  tempPt[0][4]);
+       line.setAttribute( 'y2',  tempPt[0][5]);
+       line.setAttribute("stroke", "red")
+ 
+       container.appendChild(line);
+
+
+      }
+ }
+
+
+// var draw = SVG('mysvg').size(300, 130)
+
+// var line = draw.line(0, 100, 100, 0).move(20, 20)
+// line.stroke({ color: '#f06', width: 10, linecap: 'round' })
+
 //}
+// for(var i = 0 ; i < 1000; i ++) {
+//  var r = getNode('rect', { x: i, y: 40, width: 100, height: 40, rx: 8, ry: 8, fill: 'pink', stroke:'purple', strokeWidth:7 });
+// svg.appendChild(r);
+// }
+
+function getNode(n, v) {
+  n = document.createElementNS("http://www.w3.org/2000/svg", n);
+  for (var p in v)
+    n.setAttributeNS(null, p.replace(/[A-Z]/g, function(m, p, o, s) { return "-" + m.toLowerCase(); }), v[p]);
+  return n
+}
+
 </script>
 </body>
 </html>        
