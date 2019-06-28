@@ -50,21 +50,21 @@ svgWidth = document.getElementById('cont').getAttribute("width");
       //var w = 300;
       var cars = ["Saab", "Volvo", "BMW"];
       var traces = [
-        ['doc1','doc7'],
-        ['doc2','doc11'],
-        ['doc3','doc11'],
-        ['doc4','doc11'],
-        ['doc5','doc11'],
-        ['doc6','doc7'],
-        ['doc11','doc7'],
-        ['doc7','doc8'],
-        ['doc7','doc9'],
-        ['doc7','doc10'],
-        ['doc7','doc12a'],
-        ['doc3','doc6'],
-        ['doc9','doc14'],
-        ['doc7','doc12b'],
-        ['doc1a','doc1']
+        ['','doc1','doc7'],
+        ['','doc2','doc11'],
+        ['','doc3','doc11'],
+        ['','doc4','doc11'],
+        ['','doc5','doc11'],
+        ['','doc6','doc7'],
+        ['','doc11','doc7'],
+        ['','doc7','doc8'],
+        ['','doc7','doc9'],
+        ['','doc7','doc10'],
+        ['','doc7','doc12a'],
+        ['','doc3','doc6'],
+        ['','doc9','doc14'],
+        ['','doc7','doc12b'],
+        ['','doc1a','doc1']
       ];
 
       // "pa" is panel array
@@ -77,28 +77,57 @@ svgWidth = document.getElementById('cont').getAttribute("width");
       var superArray = new Array (); 
       function A(theArray,centerDoc,locPanelNumber)
       {
-          for(var i = 0;i < theArray.length; i ++)
-          {
-            if (theArray[i]) {
+        var tempArray = new Array ();
+        // for(var i = 0;i < theArray.length; i ++)
+        //   {
 
-                  if (theArray[i][1] == centerDoc) {
-                  // alert("P: " + traces[i][0] + "," + traces[i][1]);
-                    var nArray = new Array ();
-                    y = y + 50;
-                    // nArray[0] = [x,y,traces[i][0],traces[i][1]];
-                    nArray[0] = [locPanelNumber,x,y,theArray[i][0],theArray[i][1],pCenterX,pCenterY];
-                    // paL1[i] = nArray;
+          //   if (theArray[i]) {
+          //         if (theArray[i][2] == centerDoc) {
+          //         // alert("P: " + traces[i][0] + "," + traces[i][1]);
+          //           var nArray = new Array ();
+
+          //           y = y + 50;
+          //           // nArray[0] = [x,y,traces[i][1],traces[i][2]];
+          //           nArray[0] = [locPanelNumber,x,y,theArray[i][1],theArray[i][2],pCenterX,pCenterY];
+          //           // paL1[i] = nArray;
+          //           superArray[superArray.length + 1] = nArray;
+          //           tempArray[i] = [locPanelNumber,x,y,theArray[i][1],theArray[i][2],pCenterX,pCenterY];
+          //         }
+          //   }
+          // }
+      for(var i = 0 ; i < theArray.length; i ++)
+      {
+        if (theArray[i]) {
+          t =  theArray[i][0]; 
+          r = t[2];
+          // alert(r);
+          for(var n = 0 ; n < traces.length; n ++)
+          {
+            if (traces[n])
+            {
+              if (traces[n][2] == centerDoc) {
+                // alert(traces[n][0]);
+                var nArray = new Array ();
+                y = y + 50;
+                // nArray[0] = [x,y,traces[n][0],traces[n][1]];
+                nArray[0] = [x,y,traces[n][1],traces[n][2],t[0],t[1]];
+                // paL2[n] = nArray;
                     superArray[superArray.length + 1] = nArray;
-                    if (nArray.length > 0)
-                    {
-                      A(nArray,'doc11',locPanelNumber + 1)
-                    }
-                  }
+                    tempArray[i] = [locPanelNumber,x,y,theArray[i][1],theArray[i][2],pCenterX,pCenterY];
+      
+                a = 0;
+              }
             }
           }
+        } 
+          if ((tempArray) && (tempArray.length > 0))
+          {
+            // A(traces,'doc11',locPanelNumber + 1)
+          }
+        }
       }
-
-      A(traces,'doc7',panelNumber);
+      
+       A(traces,'doc7',panelNumber);
 
 
       var x = svgWidth * .25;
@@ -109,12 +138,12 @@ svgWidth = document.getElementById('cont').getAttribute("width");
       {
         if (traces[i]) {
 
-              if (traces[i][1] == 'doc7') {
+              if (traces[i][2] == 'doc7') {
               // alert("P: " + traces[i][0] + "," + traces[i][1]);
                 var nArray = new Array ();
                 y = y + 50;
-                // nArray[0] = [x,y,traces[i][0],traces[i][1]];
-                nArray[0] = [x,y,traces[i][0],traces[i][1],pCenterX,pCenterY];
+                // nArray[0] = [x,y,traces[i][1],traces[i][2]];
+                nArray[0] = [x,y,traces[i][1],traces[i][2],pCenterX,pCenterY];
                 paL1[i] = nArray;
               }
         }
@@ -132,19 +161,18 @@ svgWidth = document.getElementById('cont').getAttribute("width");
           {
             if (traces[n])
             {
-              if (traces[n][1] == r) {
+              if (traces[n][2] == r) {
                 // alert(traces[n][0]);
                 var nArray = new Array ();
                 y = y + 50;
                 // nArray[0] = [x,y,traces[n][0],traces[n][1]];
-                nArray[0] = [x,y,traces[n][0],traces[n][1],t[0],t[1]];
+                nArray[0] = [x,y,traces[n][1],traces[n][2],t[0],t[1]];
                 paL2[n] = nArray;
       
                 a = 0;
               }
             }
           }
-          
         }
         
         //if (paL1[i][1] == 7) {
@@ -164,11 +192,11 @@ svgWidth = document.getElementById('cont').getAttribute("width");
        // alert("C: " + traces[i][1]);
        if  (traces[i])
        {
-            if (traces[i][0] == 'doc7') {
+            if (traces[i][1] == 'doc7') {
               var nArray = new Array ();
               y = y + 50;
               // nArray[0] = [x,y];
-              nArray[0] = [x,y,traces[i][0],traces[i][1],pCenterX,pCenterY];
+              nArray[0] = [x,y,traces[i][1],traces[i][2],pCenterX,pCenterY];
               paR1[i] = nArray;
             }
           }
@@ -187,12 +215,12 @@ svgWidth = document.getElementById('cont').getAttribute("width");
           {
             if (traces[n])
             {
-              if (traces[n][0] == r) {
+              if (traces[n][1] == r) {
                 // alert(traces[n][0]);
                 var nArray = new Array ();
                 y = y + 50;
                 // nArray[0] = [x,y,traces[n][0],traces[n][1]];
-                nArray[0] = [x,y,traces[n][0],traces[n][1],t[0],t[1]];
+                nArray[0] = [x,y,traces[n][1],traces[n][2],t[0],t[1]];
                 paR2[n] = nArray;
       
                 a = 0;
