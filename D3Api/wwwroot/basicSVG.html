@@ -62,7 +62,9 @@ svgWidth = document.getElementById('cont').getAttribute("width");
         ['doc7','doc10'],
         ['doc7','doc12a'],
         ['doc3','doc6'],
-        ['doc9','doc14']
+        ['doc9','doc14'],
+        ['doc7','doc12b'],
+        ['doc1a','doc1']
       ];
 
       // "pa" is panel array
@@ -71,10 +73,39 @@ svgWidth = document.getElementById('cont').getAttribute("width");
       var paR1 = new Array ();
       var paR2 = new Array ();
       var myPts = new Array ();
+      var panelNumber = 1; 
+      var superArray = new Array (); 
+      function A(theArray,centerDoc,locPanelNumber)
+      {
+          for(var i = 0;i < theArray.length; i ++)
+          {
+            if (theArray[i]) {
+
+                  if (theArray[i][1] == centerDoc) {
+                  // alert("P: " + traces[i][0] + "," + traces[i][1]);
+                    var nArray = new Array ();
+                    y = y + 50;
+                    // nArray[0] = [x,y,traces[i][0],traces[i][1]];
+                    nArray[0] = [locPanelNumber,x,y,theArray[i][0],theArray[i][1],pCenterX,pCenterY];
+                    // paL1[i] = nArray;
+                    superArray[superArray.length + 1] = nArray;
+                    if (nArray.length > 0)
+                    {
+                      A(nArray,'doc11',locPanelNumber + 1)
+                    }
+                  }
+            }
+          }
+      }
+
+      A(traces,'doc7',panelNumber);
+
 
       var x = svgWidth * .25;
       var y = 0;
-      for(var i = 0 ; i < 15; i ++)
+      // alert(traces.length)
+      // for(var i = 0 ; i < 15; i ++)
+      for(var i = 0;i < traces.length; i ++)
       {
         if (traces[i]) {
 
@@ -86,18 +117,18 @@ svgWidth = document.getElementById('cont').getAttribute("width");
                 nArray[0] = [x,y,traces[i][0],traces[i][1],pCenterX,pCenterY];
                 paL1[i] = nArray;
               }
-      }
+        }
       }
 
       x = svgWidth * .10;
       y = 0;
-      for(var i = 0 ; i < 15; i ++)
+      for(var i = 0 ; i < paL1.length; i ++)
       {
         if (paL1[i]) {
           t =  paL1[i][0]; 
           r = t[2];
           // alert(r);
-          for(var n = 0 ; n < 15; n ++)
+          for(var n = 0 ; n < traces.length; n ++)
           {
             if (traces[n])
             {
@@ -128,7 +159,7 @@ svgWidth = document.getElementById('cont').getAttribute("width");
       // populate panel R 1  (paR1)
       y = 0;
       x = svgWidth * .75;
-      for(var i = 0 ; i < 15; i ++)
+      for(var i = 0 ; i < traces.length; i ++)
       {
        // alert("C: " + traces[i][1]);
        if  (traces[i])
@@ -146,13 +177,13 @@ svgWidth = document.getElementById('cont').getAttribute("width");
 
     x = svgWidth * .90;
       y = 0;
-      for(var i = 0 ; i < 15; i ++)
+      for(var i = 0 ; i < paR1.length; i ++)
       {
         if (paR1[i]) {
           t =  paR1[i][0]; 
           r = t[3];
           // alert(r);
-          for(var n = 0 ; n < 15; n ++)
+          for(var n = 0 ; n < traces.length; n ++)
           {
             if (traces[n])
             {
@@ -179,7 +210,7 @@ svgWidth = document.getElementById('cont').getAttribute("width");
       var x1 = new Array ();
       var svgns = "http://www.w3.org/2000/svg",
       container = document.getElementById( 'cont' );
-      for(var i = 0 ; i < 15; i ++)
+      for(var i = 0 ; i < paL1.length; i ++)
       {
         var circle = document.createElementNS(svgns, 'circle');
         x1 = paL1[i];
@@ -213,7 +244,7 @@ svgWidth = document.getElementById('cont').getAttribute("width");
 
 
       // draw the PL2 circles
-      for(var i = 0 ; i < 15; i ++)
+      for(var i = 0 ; i < paL2.length; i ++)
       {
         var circle3 = document.createElementNS(svgns, 'circle');
         x1 = paL2[i];
@@ -240,7 +271,7 @@ svgWidth = document.getElementById('cont').getAttribute("width");
         }
       }
 
-      for(var i = 0 ; i < 15; i ++)
+      for(var i = 0 ; i < paR1.length; i ++)
       {
         var circle3 = document.createElementNS(svgns, 'circle');
         x1 = paR1[i];
@@ -269,7 +300,7 @@ svgWidth = document.getElementById('cont').getAttribute("width");
 
 
       // draw circles for panel Right 2
-      for(var i = 0 ; i < 15; i ++)
+      for(var i = 0 ; i < paR2.length; i ++)
       {
         var circle3 = document.createElementNS(svgns, 'circle');
         x1 = paR2[i];
@@ -335,7 +366,7 @@ svgWidth = document.getElementById('cont').getAttribute("width");
 
         // document.getElementById("cont").appendChild(line);
 
-for(var n = 0 ; n < 15; n ++)
+for(var n = 0 ; n < paL1.length; n ++)
   {
       if (paL1[n])
       {
@@ -355,7 +386,7 @@ for(var n = 0 ; n < 15; n ++)
  }
 
 
-for(var n = 0 ; n < 15; n ++)
+for(var n = 0 ; n < paL2.length; n ++)
   {
       if (paL2[n])
       {
@@ -373,7 +404,7 @@ for(var n = 0 ; n < 15; n ++)
  }
 
 
-for(var n = 0 ; n < 15; n ++)
+for(var n = 0 ; n < paR1.length; n ++)
   {
       if (paR1[n])
       {
@@ -393,7 +424,7 @@ for(var n = 0 ; n < 15; n ++)
  }
 
 
-for(var n = 0 ; n < 15; n ++)
+for(var n = 0 ; n < paR2.length; n ++)
   {
       if (paR2[n])
       {
