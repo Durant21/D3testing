@@ -34,7 +34,17 @@
           x2="490" y2="490,"
           style="stroke:rgb(255,90,50); stroke-width:5" -->
     />
-</svg>,
+</svg>
+
+
+<svg id="secondsvg" height="400" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <circle id="cir1" cx="300" cy="300" r="40" stroke="yellow" stroke-width="" fill="none" />
+        <!-- <line x1= "10" y1= "10"
+          x2="490" y2="490,"
+          style="stroke:rgb(255,90,50); stroke-width:5" -->
+    />
+</svg>
+
 
 <script>
 
@@ -64,7 +74,8 @@ svgWidth = document.getElementById('cont').getAttribute("width");
         ['','doc3','doc6'],
         ['','doc9','doc14'],
         ['','doc7','doc12b'],
-        ['','doc1a','doc1']
+        ['','doc1a','doc1'],
+        ['','doc1b','doc1a']
       ];
 
       // "pa" is panel array
@@ -75,61 +86,115 @@ svgWidth = document.getElementById('cont').getAttribute("width");
       var myPts = new Array ();
       var panelNumber = 1; 
       var superArray = new Array (); 
-      function A(theArray,centerDoc,locPanelNumber)
+      function buildLeftPanels(theArray,centerDoc,locPanelNumber)
       {
-        var tempArray = new Array ();
-        // for(var i = 0;i < theArray.length; i ++)
-        //   {
-
-          //   if (theArray[i]) {
-          //         if (theArray[i][2] == centerDoc) {
-          //         // alert("P: " + traces[i][0] + "," + traces[i][1]);
-          //           var nArray = new Array ();
-
-          //           y = y + 50;
-          //           // nArray[0] = [x,y,traces[i][1],traces[i][2]];
-          //           nArray[0] = [locPanelNumber,x,y,theArray[i][1],theArray[i][2],pCenterX,pCenterY];
-          //           // paL1[i] = nArray;
-          //           superArray[superArray.length + 1] = nArray;
-          //           tempArray[i] = [locPanelNumber,x,y,theArray[i][1],theArray[i][2],pCenterX,pCenterY];
-          //         }
-          //   }
-          // }
-      for(var i = 0 ; i < theArray.length; i ++)
-      {
-        if (theArray[i]) {
-          t =  theArray[i][0]; 
-          r = t[2];
-          // alert(r);
-          for(var n = 0 ; n < traces.length; n ++)
-          {
-            if (traces[n])
-            {
-              if (traces[n][2] == centerDoc) {
-                // alert(traces[n][0]);
-                var nArray = new Array ();
-                y = y + 50;
-                // nArray[0] = [x,y,traces[n][0],traces[n][1]];
-                nArray[0] = [x,y,traces[n][1],traces[n][2],t[0],t[1]];
-                // paL2[n] = nArray;
-                    superArray[superArray.length + 1] = nArray;
-                    tempArray[i] = [locPanelNumber,x,y,theArray[i][1],theArray[i][2],pCenterX,pCenterY];
-      
-                a = 0;
-              }
-            }
+          var tempArray = new Array ();
+          if (locPanelNumber == 1) {
+              // set variables for x,y
+              var x = svgWidth * .35;
+              var y = 0;
+          } else if (locPanelNumber == 2) {
+              x = svgWidth * .20;
+              y = 0;
+          } else if (locPanelNumber == 3) {
+              x = svgWidth * .05;
+              y = 0;
           }
-        } 
+
+
+          var u = 0;
+          for(var i = 0 ; i < theArray.length; i ++)
+          {
+            if (theArray[i]) {
+              t =  theArray[i]; 
+              r = t[3];
+              // alert(r);
+
+              for(var n = 0 ; n < traces.length; n ++)
+              {
+                if (traces[n])
+                {
+                  if (traces[n][2] == r) {
+                    // alert(traces[n][0]);
+                    var nArray = new Array ();
+                    y = y + 50;
+                    // nArray[0] = [x,y,traces[n][0],traces[n][1]];
+                    nArray[0] = [locPanelNumber,x,y,traces[n][1],traces[n][2],t[0],t[1]];
+                    // paL2[n] = nArray;
+                        superArray[superArray.length + 1] = nArray;
+                        tempArray[u] = [locPanelNumber,x,y,traces[n][1],traces[n][2],pCenterX,pCenterY];
+                        u = u + 1;
+                    a = 0;
+                  }
+                }
+              }
+            } 
+          }
           if ((tempArray) && (tempArray.length > 0))
           {
-            // A(traces,'doc11',locPanelNumber + 1)
+            buildLeftPanels(tempArray,'doc11',locPanelNumber + 1)
           }
-        }
+      }
+     
+       function buildRightPanels(theArray,centerDoc,locPanelNumber)
+      {
+          var tempArray1 = new Array ();
+          if (locPanelNumber == 1) {
+              // set variables for x,y
+              var x = svgWidth * .65;
+              var y = 0;
+          } else if (locPanelNumber == 2) {
+              x = svgWidth * .80;
+              y = 0;
+          } else if (locPanelNumber == 3) {
+              x = svgWidth * .95;
+              y = 0;
+          }
+
+
+          var u = 0;
+          for(var i = 0 ; i < theArray.length; i ++)
+          {
+            if (theArray[i]) {
+              t =  theArray[i]; 
+              r = t[3];
+              // alert(r);
+
+              for(var n = 0 ; n < traces.length; n ++)
+              {
+                if (traces[n])
+                {
+                  if (traces[n][1] == r) {
+                    // alert(traces[n][0]);
+                    var nArray = new Array ();
+                    y = y + 50;
+                    // nArray[0] = [x,y,traces[n][0],traces[n][1]];
+                    nArray[0] = [locPanelNumber,x,y,traces[n][1],traces[n][2],t[0],t[1]];
+                    // paL2[n] = nArray;
+                        superArray[superArray.length + 1] = nArray;
+                        tempArray1[u] = [locPanelNumber,x,y,traces[n][1],traces[n][2],pCenterX,pCenterY];
+                        u = u + 1;
+                    a = 0;
+                  }
+                }
+              }
+            } 
+          }
+          if ((tempArray1) && (tempArray1.length > 0))
+          {
+            // buildRightPanels(tempArray1,'doc11',locPanelNumber + 1)
+          }
       }
       
-       A(traces,'doc7',panelNumber);
+      var firstArray1 = new Array ();
+      var firstArray2 = new Array ();
 
+      firstArray1[0] = ['','','','doc7'];
+      firstArray2[0] = firstArray1;
+       buildLeftPanels(firstArray1,'doc7',panelNumber);
+       buildRightPanels(firstArray1,'doc7',panelNumber);
 
+      // set variables for x,y
       var x = svgWidth * .25;
       var y = 0;
       // alert(traces.length)
@@ -480,6 +545,48 @@ for(var n = 0 ; n < paR2.length; n ++)
 //  var r = getNode('rect', { x: i, y: 40, width: 100, height: 40, rx: 8, ry: 8, fill: 'pink', stroke:'purple', strokeWidth:7 });
 // svg.appendChild(r);
 // }
+
+
+      // draw circles
+      // document.getElementById("demo").innerHTML = cars;
+      var x1 = new Array ();
+      var svgns = "http://www.w3.org/2000/svg",
+      container = document.getElementById( 'secondsvg' );
+      for(var i = 1 ; i < superArray.length; i ++)
+      {
+        var circle = document.createElementNS(svgns, 'circle');
+        if (superArray[i])
+        {
+          x1 = superArray[i][0];
+
+          if (x1) {
+            x = x1[1];
+            y = x1[2];
+            valP = x1[3];
+            var tmpPt = new Array ();
+            tmpPt[0] = x;
+            tmpPt[1] = y;
+            circle.setAttributeNS(null, 'cx', x);
+            circle.setAttributeNS(null, 'cy', y);
+            circle.setAttributeNS(null, 'r', 2);
+            circle.setAttributeNS(null, 'style', 'fill: none; stroke: blue; stroke-width: 1px;' );
+            container.appendChild(circle);
+
+            
+            var text1 = document.createElementNS(svgns, 'text');
+            text1.setAttributeNS(null,'x',x);
+            text1.setAttributeNS(null,'y',y);
+            text1.setAttributeNS(null,'font-size','20px');
+            text1.setAttributeNS(null,'fill','blue');
+            var textNode = document.createTextNode(valP);
+            text1.appendChild(textNode);
+            document.getElementById("myg").appendChild(text1);
+            container.appendChild(text1);
+
+          }
+        }
+      }
+
 
 function getNode(n, v) {
   n = document.createElementNS("http://www.w3.org/2000/svg", n);
