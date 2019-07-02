@@ -86,7 +86,7 @@ svgWidth = document.getElementById('cont').getAttribute("width");
       var myPts = new Array ();
       var panelNumber = 1; 
       var superArray = new Array (); 
-      function buildLeftPanels(theArray,centerDoc,locPanelNumber)
+      function buildLeftPanels(theArray,centerDoc,locPanelNumber, locPanelSide)
       {
           var tempArray = new Array ();
           if (locPanelNumber == 1) {
@@ -107,7 +107,12 @@ svgWidth = document.getElementById('cont').getAttribute("width");
           {
             if (theArray[i]) {
               t =  theArray[i]; 
-              r = t[3];
+              if (locPanelSide == "L") {
+                r = t[3]; 
+              } else {
+                r = t[4];
+              }
+              
               // alert(r);
 
               for(var n = 0 ; n < traces.length; n ++)
@@ -119,10 +124,10 @@ svgWidth = document.getElementById('cont').getAttribute("width");
                     var nArray = new Array ();
                     y = y + 50;
                     // nArray[0] = [x,y,traces[n][0],traces[n][1]];
-                    nArray[0] = [locPanelNumber,x,y,traces[n][1],traces[n][2],t[0],t[1]];
+                    nArray[0] = [locPanelNumber,x,y,traces[n][1],traces[n][2],t[1],t[2],locPanelSide];
                     // paL2[n] = nArray;
                         superArray[superArray.length + 1] = nArray;
-                        tempArray[u] = [locPanelNumber,x,y,traces[n][1],traces[n][2],pCenterX,pCenterY];
+                        tempArray[u] = [locPanelNumber,x,y,traces[n][1],traces[n][2],t[1],t[2]];
                         u = u + 1;
                     a = 0;
                   }
@@ -132,11 +137,11 @@ svgWidth = document.getElementById('cont').getAttribute("width");
           }
           if ((tempArray) && (tempArray.length > 0))
           {
-            buildLeftPanels(tempArray,'doc11',locPanelNumber + 1)
+            buildLeftPanels(tempArray,'doc11',locPanelNumber + 1,locPanelSide)
           }
       }
      
-       function buildRightPanels(theArray,centerDoc,locPanelNumber)
+       function buildRightPanels(theArray,centerDoc,locPanelNumber, locPanelSide)
       {
           var tempArray1 = new Array ();
           if (locPanelNumber == 1) {
@@ -157,9 +162,13 @@ svgWidth = document.getElementById('cont').getAttribute("width");
           {
             if (theArray[i]) {
               t =  theArray[i]; 
-              r = t[3];
-              // alert(r);
-
+              
+               if (locPanelSide == "L") {
+                r = t[3]; 
+              } else {
+                r = t[4];
+              }
+              
               for(var n = 0 ; n < traces.length; n ++)
               {
                 if (traces[n])
@@ -169,10 +178,10 @@ svgWidth = document.getElementById('cont').getAttribute("width");
                     var nArray = new Array ();
                     y = y + 50;
                     // nArray[0] = [x,y,traces[n][0],traces[n][1]];
-                    nArray[0] = [locPanelNumber,x,y,traces[n][1],traces[n][2],t[0],t[1]];
+                    nArray[0] = [locPanelNumber,x,y,traces[n][1],traces[n][2],t[1],t[2],locPanelSide];
                     // paL2[n] = nArray;
                         superArray[superArray.length + 1] = nArray;
-                        tempArray1[u] = [locPanelNumber,x,y,traces[n][1],traces[n][2],pCenterX,pCenterY];
+                        tempArray1[u] = [locPanelNumber,x,y,traces[n][1],traces[n][2],t[1],t[2]];
                         u = u + 1;
                     a = 0;
                   }
@@ -182,17 +191,17 @@ svgWidth = document.getElementById('cont').getAttribute("width");
           }
           if ((tempArray1) && (tempArray1.length > 0))
           {
-            // buildRightPanels(tempArray1,'doc11',locPanelNumber + 1)
+            buildRightPanels(tempArray1,'doc11',locPanelNumber + 1,locPanelSide)
           }
       }
       
-      var firstArray1 = new Array ();
-      var firstArray2 = new Array ();
+      var firstArrayL = new Array ();
+      var firstArrayR = new Array ();
 
-      firstArray1[0] = ['','','','doc7'];
-      firstArray2[0] = firstArray1;
-       buildLeftPanels(firstArray1,'doc7',panelNumber);
-       buildRightPanels(firstArray1,'doc7',panelNumber);
+      firstArrayL[0] = ['',pCenterX,pCenterY,'doc11'];
+      firstArrayR[0] = ['',pCenterX,pCenterY,'','doc11'];
+       buildLeftPanels(firstArrayL,'doc7',panelNumber,'L');
+       buildRightPanels(firstArrayR,'doc7',panelNumber,'R');
 
       // set variables for x,y
       var x = svgWidth * .25;
@@ -562,7 +571,12 @@ for(var n = 0 ; n < paR2.length; n ++)
           if (x1) {
             x = x1[1];
             y = x1[2];
-            valP = x1[3];
+            side = x1[7];
+            if (side == 'L') {
+              valP = x1[3];
+            } else {
+              valP = x1[4];
+            }
             var tmpPt = new Array ();
             tmpPt[0] = x;
             tmpPt[1] = y;
@@ -587,7 +601,26 @@ for(var n = 0 ; n < paR2.length; n ++)
         }
       }
 
+      // draw lines
+      for(var n = 0 ; n < superArray.length; n ++)
+        {
+            if (superArray[n])
+            {
+            tempPt = superArray[n];
+            k = tempPt[0][1];
+            var line = document.createElementNS(svgns, 'line');
+            line.setAttribute( 'x1',  k.toString());
+            line.setAttribute( 'y1',   tempPt[0][2]);
+            line.setAttribute( 'x2',  tempPt[0][5]);
+            line.setAttribute( 'y2',  tempPt[0][6]);
+            line.setAttribute("stroke", "red")
+      
+            container.appendChild(line);
 
+
+            }
+      }
+            
 function getNode(n, v) {
   n = document.createElementNS("http://www.w3.org/2000/svg", n);
   for (var p in v)
